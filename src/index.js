@@ -311,7 +311,7 @@ console.log(fib(7));
 
 
 
-// --- Задачи на работу с объектами --- //
+// --- Задачи на работу с объектами и массивом--- //
 
 
 // 1 Напишите функцию showExperience, которая будет принимать в себя объект со всеми данными и возвращать строку с опытом. showExperience(personalPlanPeter) => '1 month'
@@ -490,3 +490,77 @@ function availableCurr(available, missing = 'UAH') {
 
 
 console.log(availableCurr([...baseCurrencies, ...additionalCurrencies]));
+
+
+
+// 8 Определить буджет магазина
+
+const shoppingMallData = {
+    shops: [
+        {
+            width: 10,
+            length: 5
+        },
+        {
+            width: 15,
+            length: 7
+        },
+        {
+            width: 20,
+            length: 5
+        },
+        {
+            width: 8,
+            length: 10
+        }
+    ],
+    height: 5,
+    moneyPer1m3: 30,
+    budget: 50000
+};
+
+function isBudgetEnough(data) {
+    let S = 0;
+    let V = 0;
+    const { shops, height, moneyPer1m3, budget } = data;
+    shops.forEach(item => {
+        const { width, length } = item;
+        S += width * length;
+    });
+    V = S * height;
+
+    return (V * moneyPer1m3) <= budget ? 'Бюджета достаточно' : 'Бюджета недостаточно';
+}
+
+console.log(isBudgetEnough(shoppingMallData));
+
+
+// 9 команд может быть только 3 по 3 человека. Напишите функцию sortStudentsByGroups, которая принимает в себя массив строк. Эти группы должны быть массивами. Как итог, функция возвращает новый массив с тремя командами и строкой как 4й элемент.
+
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'].sort();
+
+function sortStudentsByGroups(student) {
+
+    let str = '';
+    const arr = [];
+    for (let i = 0; i <= student.length; i++) {
+        if (i === student.length) {
+            break;
+        }
+        str += `${student[i]} `;
+
+        if (str.trim().split(' ').length == 3) {
+            arr.push(str.trim().split(' '));
+            str = '';
+        }
+    }
+    if (str.length !== 0) {
+        arr.push(`Оставшиеся студенты: - ${str.trim().split(' ').join('')}`);
+    } else {
+        arr.push('Оставшиеся студенты: -');
+    }
+    return arr;
+}
+
+console.log(sortStudentsByGroups(students));
+
