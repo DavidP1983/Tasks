@@ -630,3 +630,111 @@ function transferWaitors(data) {
 console.log(transferWaitors(restorantData));
 
 console.log(restorantData);
+
+
+
+// --- Recurtion --- //
+
+
+// Recurtion
+
+let studentss = {
+    js: [{
+        name: "John",
+        progress: 100
+    }, {
+        name: "Ivan",
+        progress: 60
+    }],
+
+    html: {
+        basic: [{
+            name: "Peter",
+            progress: 20
+        }, {
+            name: "Ann",
+            progress: 18
+        }],
+
+        pro: [{
+            name: "Sam",
+            progress: 10
+        }]
+    }
+};
+
+
+function getTotoalProgress(data) {
+    let total = 0;
+    let students = 0;
+
+    for (let course of Object.values(data)) {
+        if (Array.isArray(course)) {
+            students += course.length;
+            for (let progres of course) {
+                const { progress } = progres;
+                total += progress;
+            }
+        } else {
+            for (let subCourse of Object.values(course)) {
+                students += subCourse.length;
+                for (let i = 0; i < subCourse.length; i++) {
+                    total += subCourse[i].progress;
+                }
+            }
+        }
+    }
+
+    return total / students;
+}
+
+
+// console.log(getTotoalProgress(studentss));
+
+
+function getTotalByRecurtion(data) {
+
+    if (Array.isArray(data)) {
+        let total = 0;
+
+        for (let progres of data) {
+            const { progress } = progres;
+            total += progress;
+        }
+        return [total, data.length];
+
+    } else {
+        let total = [0, 0];
+
+        for (let subData of Object.values(data)) {
+            const subDataArr = getTotalByRecurtion(subData);
+            total[0] += subDataArr[0];
+            total[1] += subDataArr[1];
+        }
+        return total;
+    }
+}
+
+const resul = getTotalByRecurtion(studentss);
+console.log(resul[0] / resul[1]);
+
+
+
+// 1 Напишите функцию, которая вычисляет факториал.
+
+function fact(num) {
+    if (!Number.isInteger(num)) {
+        return 'Must be Integer';
+    }
+
+    // if (num === 1) {
+    //     return num;
+    // } else {
+    //     return num * fact(num - 1);
+    // }
+
+    return num >= 1 ? num * fact(num - 1) : 1;
+}
+
+console.log(fact(5));
+
