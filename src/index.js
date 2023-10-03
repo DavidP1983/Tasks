@@ -736,5 +736,87 @@ function fact(num) {
     return num >= 1 ? num * fact(num - 1) : 1;
 }
 
-console.log(fact(5));
+console.log(fact(3));
 
+
+
+// --- Logical Tasks --- //
+
+
+// В каждой книге есть n страниц с номерами страниц от 1 до n. Написать функцию amountOfPages, аргумент которой summary составляется путем сложения количества цифр всех номеров страниц. Эта функция возвращает число - количество страниц n в книге. amountOfPages(25) => 17
+
+function amountOfPages(summary) {
+    let num = 0;
+    let str = '';
+    for (let i = 1; i <= summary; i++) {
+        str += i;
+        num = i;
+        if (str.length == summary) {
+            return num;
+        }
+    }
+    return num;
+}
+
+console.log(amountOfPages(25));
+
+
+// Напишите функцию isPangram, которая принимает в себя строку и возвращает логическое значение. Если строка является панграммой - вернется true, если нет - false.
+
+function isPangram(str) {
+    const set = new Set(str.toLowerCase());
+    set.delete(' ');
+    return Array.from(set).length == 26;
+}
+
+console.log(isPangram("The quick brown fox jumps over the lazy dog"));
+
+
+
+function isPangram(str) {
+
+    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    const newStr = str.toUpperCase().split('').sort();
+    const arr = [];
+    newStr.forEach(item => {
+        if (item !== ' ' && !arr.includes(item)) {
+            arr.push(item);
+        }
+    });
+    return arr.length === alphabet.length;
+}
+
+console.log(isPangram("The quick brown fox jumps over the lazy dog"));
+
+
+
+// Создайте функцию deepCount, которая будет считать количество всех элементов в массиве, включая и вложенные массивы. Учтите, что сам вложенный массив тоже входит в счет
+
+let count = 0;
+function deepCount(arr) {
+    count += arr.length;
+    arr.forEach(item => {
+        if (Array.isArray(item)) {
+            deepCount(item);
+        }
+    });
+    return count;
+}
+
+console.log(deepCount(["1", 5, "3", ["10"]]));
+
+
+
+function deepCount(arr) {
+
+    let count = 0;
+    arr.forEach(item => {
+        count++;
+        if (Array.isArray(item)) {
+            count += deepCount(item);
+        }
+    });
+    return count;
+}
+
+console.log(deepCount(["1", 5, "3", ["10"]]));
