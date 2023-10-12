@@ -11,9 +11,15 @@
 		},
 		{
 			"path": "../../DOM"
+		},
+		{
+			"path": "../../Food"
+		},
+		{
+			"path": "../../../../../xampp/htdocs/food"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "TestSection1"
+		"liveServer.settings.multiRootWorkspaceName": "practice"
 	}
 }
