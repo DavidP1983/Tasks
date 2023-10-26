@@ -952,3 +952,30 @@ function getTotalIncomeAmount(funds) {
 
 console.log(getTotalIncomeAmount(funds));
 
+
+
+//Function Composition
+
+const multiply20 = (price) => price * 20;
+const divide100 = (price) => price / 100;
+const normalizePrice = (price) => price.toFixed(2);
+
+function compose(...rest) {
+    return rest.reduceRight((acc, carrentV) => carrentV(acc), 200);
+}
+
+const discount = compose(normalizePrice, divide100, multiply20);
+console.log(discount);
+
+
+
+
+const add1 = (a) => { return a + 1; };
+const addAll3 = (a, b, c) => { return a + b + c; };
+
+const composeWithArgs = (...rest) => (...num) => {
+    return rest.reduceRight((acc, currentV) => acc(currentV(...num)));
+};
+
+const composeResult = composeWithArgs(addAll3, add1)(1, 2, 3);
+console.log(composeResult);
